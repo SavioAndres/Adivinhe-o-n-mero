@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -10,6 +10,8 @@ use Laravel\Lumen\Auth\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    //php artisan make:model Models/User -m
+
     use Authenticatable, Authorizable;
 
     /**
@@ -18,7 +20,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'id_social', 'name', 'email', 'photo', 'seal', 'longitude', 'latitude', 'api_key'
     ];
 
     /**
