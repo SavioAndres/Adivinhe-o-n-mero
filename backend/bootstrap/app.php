@@ -48,6 +48,14 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->singleton(Illuminate\Session\SessionManager::class, function () use ($app) {
+    return $app->loadComponent('session', Illuminate\Session\SessionServiceProvider::class, 'session');
+});
+
+$app->singleton('session.store', function () use ($app) {
+    return $app->loadComponent('session', Illuminate\Session\SessionServiceProvider::class, 'session.store');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -60,6 +68,7 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('session');
 
 /*
 |--------------------------------------------------------------------------
@@ -72,8 +81,14 @@ $app->configure('app');
 |
 */
 
+$app->bind(Illuminate\Session\SessionManager::class, function ($app) {    
+    return $app->make('session');
+});
+
 $app->middleware([
-    App\Http\Middleware\ExampleMiddleware::class
+    //App\Http\Middleware\ExampleMiddleware::class
+    App\Http\Middleware\CorsMiddleware::class,
+    Illuminate\Session\Middleware\StartSession::class
 ]);
 
 $app->routeMiddleware([
@@ -94,6 +109,7 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Session\SessionServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 //composer require flipbox/lumen-generator
 //$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);

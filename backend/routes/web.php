@@ -14,5 +14,16 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Área de backend da aplicação \'Adivinhe o número\'';
+});
+
+$router->post('createaccount', 'AccountController@store');
+$router->post('login', 'AccountController@authenticate');
+$router->get('ranking', 'PlayController@index');
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->put('editaccount', 'AccountController@edit');
+    $router->delete('deleteccount', 'AccountController@delete');
+    $router->post('play', 'PlayController@play');
+    $router->get('user/{id}', 'UserController@show');
 });

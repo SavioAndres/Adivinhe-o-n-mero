@@ -15,14 +15,18 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('id_social')->unique();
+            $table->string('id_social')
+                    ->unique()
+                    ->nullable()
+                    ->default(null);
             $table->string('email')->unique();
             $table->string('password');
             $table->string('name');
             $table->string('photo')->nullable();
-            $table->string('seal')->nullable();
+            $table->integer('seal');
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
+            $table->float('score');
             $table->text('api_key')
                     ->unique()
                     ->nullable()
