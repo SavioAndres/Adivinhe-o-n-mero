@@ -7,25 +7,29 @@ import { CreateaccountComponent } from './pages/createaccount/createaccount.comp
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ConfigComponent } from './pages/config/config.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
   { 
     path: '', 
-    pathMatch: 'full', 
+    pathMatch: 'full',
+    component: RankingComponent
+  },
+  { 
+    path: 'play',
     component: DashboardComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   { 
     path: 'profile/:id',
     component: ProfileComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   { 
     path: 'config',
     component: ConfigComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
-  { path: 'ranking', component: RankingComponent },
   { path: 'createaccount', component: CreateaccountComponent },
   { path: 'login', component: LoginComponent },
 ];

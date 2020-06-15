@@ -18,8 +18,8 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('auth');
-    window.location.replace('/login');
+    localStorage.removeItem('auth-token');
+    window.location.replace('/');
   }
 
 }

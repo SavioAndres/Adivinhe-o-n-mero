@@ -1,0 +1,39 @@
+.content-number {
+ text-align: center;
+}
+
+.body-container-play {
+    position: absolute;
+    width: 100vw;
+    height: 40vh;
+    margin-top: 120px;
+    border: 3px solid #80deea;
+}
+
+.content {
+    width: 500px;
+    margin-top: -70px;
+}
+
+.btn {
+    width: 100%;
+}
+
+.content-animation {
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position-x: 50%, 100%;
+    animation: backgroundMove 450s ease-in-out 0s infinite reverse;
+    background-image: url('../../../assets/background.webp'), url('../../../assets/background.webp');
+}
+
+@keyframes backgroundMove {
+    
+    50% {
+        background-position-x: 200%, 420%, 180%;
+    }
+
+    100% {
+        background-position-x: 1320%, 930%, 550%;
+    }
+}

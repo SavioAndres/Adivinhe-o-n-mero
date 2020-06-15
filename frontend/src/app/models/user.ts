@@ -9,4 +9,5 @@ export interface User {
     latitude: string;
     score: number;
     api_key: string;
+    status: boolean;
 }

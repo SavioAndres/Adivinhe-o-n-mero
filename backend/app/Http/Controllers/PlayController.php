@@ -20,29 +20,30 @@ class PlayController extends Controller
     public function play(Request $request)
     {
         $numberOfMoves = $this->numberOfMoves($request);
-        if ($numberOfMoves == null) {
-            $this->start($request);
-        } else {
+        if ($numberOfMoves != null) {
             $getPlay = $this->getPlay($request);
             if ($request->value == $getPlay) {
                 $this->resetPlay($request);
                 return response()->json(['hit' => true, 'suggestion' => 0, 'moves' => $numberOfMoves]);
             } else if ($request->value > $getPlay) {
                 $this->addMoves($request);
-                return response()->json(['hit' => false, 'suggestion' => -1, 'moves' => $numberOfMoves]);
+                return response()->json(['hit' => false, 'suggestion' => -1, 'moves' => $numberOfMoves, 'a' => $request->cookie('lumen_session')]);
+                
             } else {
                 $this->addMoves($request);
                 return response()->json(['hit' => false, 'suggestion' => 1, 'moves' => $numberOfMoves]);
             }
+        } else {
+            return response()->json(['hit' => false, 'suggestion' => 0, 'moves' => $numberOfMoves, 'a' => $request->cookie('lumen_session')]);
         }
+        
     }
 
-    private function start(Request $request)
+    public function start(Request $request)
     {
         $session = $request->session();
         $session->put('play', random_int(0, 1000));
         $session->put('moves', 1);
-        $this->play($request);
     }
 
     private function getPlay(Request $request)

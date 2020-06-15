@@ -1,1 +1,20 @@
-<p>ranking works!</p>
+<div class="container">
+    <div class="content">
+    <table>
+        <thead>
+          <tr>
+              <th>Posição</th>
+              <th>Nome do jogador</th>
+              <th>Pontuação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of users orderBy:'-score'; index as i">
+            <td>{{ i }}</td>
+            <td><a routerLink="profile/{{ item.id }}">{{ item.name }}</a></td>
+            <td>{{ item.score }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+</div>

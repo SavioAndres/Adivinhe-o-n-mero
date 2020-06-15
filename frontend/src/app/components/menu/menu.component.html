@@ -1,21 +1,34 @@
 <ul id="dropdown1" class="dropdown-content dropdown-navbar" *ngIf="authenticated">
-    <li><a routerLink="/">Sua conta</a></li>
-    <li class="divider"></li>
-    <li><a (click)="logout()">Sair</a></li>
-  </ul>
-  <nav *ngIf="authenticated" class="purple darken-1">
-    <div class="container">
-      <div class="nav-wrapper">
-        <a routerLink="/" class="brand-logo">Adivinhe o número</a>
-        <ul class="right hide-on-med-and-down">
-          <li><a routerLink="/depositar">Depositar</a></li>
-          <li><a routerLink="/transferir">Transferir</a></li>
-          <li><a routerLink="/sacar">Sacar</a></li>
-          <!-- Dropdown Trigger -->
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">
-              <i class="material-icons right">arrow_drop_down</i>
-            </a></li>
-        </ul>
-      </div>
+  <li><a routerLink="/config">Configurações</a></li>
+  <li class="divider"></li>
+  <li><a (click)="logout()">Sair</a></li>
+</ul>
+<nav *ngIf="authenticated" class="blue-grey darken-1">
+  <div class="container">
+    <div class="nav-wrapper">
+      <a routerLink="/" class="brand-logo">Adivinhe o número</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a routerLink="/">Ranking</a></li>
+        <li><a routerLink="/play">Jogar</a></li>
+        <li><a routerLink="/profile">Perfil</a></li>
+        <!-- Dropdown Trigger -->
+        <li>
+          <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+<nav *ngIf="!authenticated" class="blue-grey darken-1">
+  <div class="container">
+    <div class="nav-wrapper">
+      <a routerLink="/" class="brand-logo">Adivinhe o número</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a class="btn" routerLink="/login">Login</a></li>
+        <li><a class="btn" routerLink="/createaccount">Criar conta</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
