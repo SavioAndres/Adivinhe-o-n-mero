@@ -9,7 +9,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of users orderBy:'-score'; index as i">
+          <tr *ngFor="let item of users; index as i">
             <td>{{ i }}</td>
             <td><a routerLink="profile/{{ item.id }}">{{ item.name }}</a></td>
             <td>{{ item.score }}</td>

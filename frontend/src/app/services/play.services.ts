@@ -9,6 +9,7 @@ import { retry, catchError } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Play } from '../models/play';
 import { CookieService } from 'ngx-cookie-service';
+import { Giphy } from '../models/giphy';
 
 @Injectable({
   providedIn: 'root',
@@ -17,14 +18,15 @@ export class PlayService {
   private url: string = 'http://localhost:8000';
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {
-    cookieService.set('lumen_session', 'BArDt9kwvg9Zu7tvtEvmj1wEQdqGqCp2L02Unrir')
+    //cookieService.set('lumen_session', 'BArDt9kwvg9Zu7tvtEvmj1wEQdqGqCp2L02Unrir')
   }
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('auth-token'),
-    })
+    }),
+    withCredentials: true
   };
 
   play(play: Play): Observable<Play> {
@@ -35,6 +37,12 @@ export class PlayService {
         this.httpOptions
       )
       .pipe(retry(2), catchError(this.handleError));
+  }
+
+  gif() {
+    return this.httpClient.get<Giphy>(
+      'http://api.giphy.com/v1/gifs/random?tag=ryan+gosling&api_key=cukiTAAFqsEo4jHogANyyEMYcPrye0ZF&limit=1'
+    );
   }
 
   handleError(error: HttpErrorResponse) {

@@ -41,6 +41,11 @@ class UserController extends Controller
         return User::findOrFail($id);
     }
 
+    public function showMe(Request $request)
+    {
+        return User::findOrFail($request->userid);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

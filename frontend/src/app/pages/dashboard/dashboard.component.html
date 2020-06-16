@@ -1,20 +1,28 @@
 <div class="container content-number">
-  <label>Tentativas</label>
-  
-  <h5>{{ response }}</h5>
+  <div style="height: 24px; margin-top: 20px;">
+    <label>{{ attempt }}</label>
+  </div>
+  <div style="height: 44px;">
+    <h5>{{ response }}</h5>
+  </div>
 </div>
 <div class="body-container-play content-animation">
+
   <div class="content">
-    <form (ngSubmit)="player(f)" #f="ngForm">
-    <div class="row">
-      <div class="input-field col s12">
-        <input [(ngModel)]="play.value" id="number" name="value" type="number" class="validate" required />
-        <label for="number">Digite um número</label>
+    <form *ngIf="startPlay" (ngSubmit)="player(f)" #f="ngForm">
+      <div class="row">
+        <div class="input-field col s12">
+          <input [(ngModel)]="play.value" id="number" name="value" type="number" class="validate" autofocus required />
+          <label for="number">Digite um número</label>
+        </div>
+        <div class="col s12">
+          <button class="btn" type="submit">Tentar</button>
+        </div>
       </div>
-      <div class="col s12">
-        <button class="btn" type="submit">Tentar</button>
-      </div>
+    </form>
+    <div *ngIf="!startPlay" style="margin-bottom: 20px;">
+      <button class="btn" (click)="start()">Iniciar</button>
     </div>
-  </form>
+    <img class="img-content" src="{{ gif }}" />
   </div>
 </div>

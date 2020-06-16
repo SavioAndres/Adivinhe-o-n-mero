@@ -23,23 +23,26 @@ class PlayController extends Controller
         if ($numberOfMoves != null) {
             $getPlay = $this->getPlay($request);
             if ($request->value == $getPlay) {
+                $this->winner($request);
                 $this->resetPlay($request);
-                return response()->json(['hit' => true, 'suggestion' => 0, 'moves' => $numberOfMoves]);
+                return response()->json(['hit' => true, 'suggestion' => 0, 'moves' => $numberOfMoves, 'gif' => $this->gif('congratulations')]);
             } else if ($request->value > $getPlay) {
                 $this->addMoves($request);
-                return response()->json(['hit' => false, 'suggestion' => -1, 'moves' => $numberOfMoves, 'a' => $request->cookie('lumen_session')]);
+                return response()->json(['hit' => false, 'suggestion' => -1, 'moves' => $numberOfMoves, 'gif' => $this->gif('missed')]);
                 
             } else {
                 $this->addMoves($request);
-                return response()->json(['hit' => false, 'suggestion' => 1, 'moves' => $numberOfMoves]);
+                return response()->json(['hit' => false, 'suggestion' => 1, 'moves' => $numberOfMoves, 'gif' => $this->gif('missed')]);
             }
         } else {
-            return response()->json(['hit' => false, 'suggestion' => 0, 'moves' => $numberOfMoves, 'a' => $request->cookie('lumen_session')]);
+            //$request->cookie();
+            $this->start($request);
+            return response()->json(['hit' => false, 'suggestion' => 0, 'moves' => $numberOfMoves]);
         }
         
     }
 
-    public function start(Request $request)
+    private function start(Request $request)
     {
         $session = $request->session();
         $session->put('play', random_int(0, 1000));
@@ -69,6 +72,27 @@ class PlayController extends Controller
     {
         $session = $request->session();
         $session->put('moves', null);
+    }
+
+    public function winner(Request $request)
+    {
+        $numMoves = (int) $this->numberOfMoves($request);
+        $user = User::where('id', $request->userid)->first();
+        $user->score = $user->score + (1 / $numMoves);
+        $user->update();
+        return $user;
+    }
+
+    private function gif($result)
+    {
+        if ($result == 'missed') {
+            $url = 'http://api.giphy.com/v1/gifs/random?tag=missed&api_key=cukiTAAFqsEo4jHogANyyEMYcPrye0ZF&limit=1';
+        } else {
+            $url = 'http://api.giphy.com/v1/gifs/random?tag=congratulations&api_key=cukiTAAFqsEo4jHogANyyEMYcPrye0ZF&limit=1';
+        }
+        $get = file_get_contents($url);
+        $json = json_decode($get, true);
+        return $json['data']['images']['downsized_large']['url'];
     }
 
 }

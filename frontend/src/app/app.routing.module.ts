@@ -8,6 +8,7 @@ import { RankingComponent } from './pages/ranking/ranking.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ConfigComponent } from './pages/config/config.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { RedirectrofileComponent } from './components/redirectrofile/redirectrofile.component';
 
 const routes: Routes = [
   { 
@@ -26,6 +27,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { 
+    path: 'profile',
+    component: RedirectrofileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'config',
     component: ConfigComponent,
     canActivate: [AuthGuard]

@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { RedirectrofileComponent } from './components/redirectrofile/redirectrofile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CookieService } from 'ngx-cookie-service';
     DashboardComponent,
     LoginComponent,
     ProfileComponent,
-    RankingComponent
+    RankingComponent,
+    RedirectrofileComponent
   ],
   imports: [
     BrowserModule,

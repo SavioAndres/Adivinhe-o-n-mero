@@ -7,15 +7,20 @@
     width: 100vw;
     height: 40vh;
     margin-top: 120px;
-    border: 3px solid #80deea;
+    border-top: 3px solid #80deea;
+    border-bottom: 3px solid #80deea;
 }
 
 .content {
+    margin-top: -84px;
     width: 500px;
-    margin-top: -70px;
 }
 
 .btn {
+    width: 100%;
+}
+
+.img-content {
     width: 100%;
 }
 

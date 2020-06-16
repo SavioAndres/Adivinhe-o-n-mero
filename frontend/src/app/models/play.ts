@@ -3,4 +3,5 @@ export interface Play {
     suggestion: number;
     moves: number;
     value: number;
+    gif: string;
 }
