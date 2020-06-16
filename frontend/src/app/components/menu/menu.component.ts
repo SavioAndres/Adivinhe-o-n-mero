@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('auth-token');
+    localStorage.removeItem('start');
     window.location.replace('/');
   }
 

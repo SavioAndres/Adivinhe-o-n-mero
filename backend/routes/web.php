@@ -21,14 +21,11 @@ $router->post('createaccount', 'AccountController@store');
 $router->post('login', 'AccountController@authenticate');
 $router->get('ranking', 'PlayController@index');
 
-
-
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->put('editaccount', 'AccountController@edit');
     $router->delete('deleteccount', 'AccountController@delete');
     $router->post('play', 'PlayController@play');
     $router->get('user', 'UserController@showMe');
     $router->get('user/{id}', 'UserController@show');
-
-    $router->get('aa', 'PlayController@gif');
+    $router->get('scoresuser/{id}', 'UserController@scores');
 });

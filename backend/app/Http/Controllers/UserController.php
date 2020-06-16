@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Score;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -44,6 +45,11 @@ class UserController extends Controller
     public function showMe(Request $request)
     {
         return User::findOrFail($request->userid);
+    }
+
+    public function scores(Request $request, $id)
+    {
+        return Score::where('id_user', $id)->first();
     }
 
     /**

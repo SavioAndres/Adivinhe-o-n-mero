@@ -18,7 +18,7 @@ class Score extends Model implements AuthenticatableContract, AuthorizableContra
      * @var array
      */
     protected $fillable = [
-        'id_user', 'created', 'score',
+        'id_user', 'created', 'score', 'attempts'
     ];
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Score;
 
 class PlayController extends Controller
 {
@@ -74,19 +75,26 @@ class PlayController extends Controller
         $session->put('moves', null);
     }
 
-    public function winner(Request $request)
+    private function winner(Request $request)
     {
         $numMoves = (int) $this->numberOfMoves($request);
         $user = User::where('id', $request->userid)->first();
         $user->score = $user->score + (1 / $numMoves);
         $user->update();
+        $date = new \DateTime();
+        $score = new Score;
+        $score->id_user = $request->userid;
+        $score->created = $date->getTimestamp();
+        $score->score = $user->score;
+        $score->attempts = $numMoves;
+        $score->save();
         return $user;
     }
 
     private function gif($result)
     {
         if ($result == 'missed') {
-            $url = 'http://api.giphy.com/v1/gifs/random?tag=missed&api_key=cukiTAAFqsEo4jHogANyyEMYcPrye0ZF&limit=1';
+            $url = 'http://api.giphy.com/v1/gifs/random?tag=sad&api_key=cukiTAAFqsEo4jHogANyyEMYcPrye0ZF&limit=1';
         } else {
             $url = 'http://api.giphy.com/v1/gifs/random?tag=congratulations&api_key=cukiTAAFqsEo4jHogANyyEMYcPrye0ZF&limit=1';
         }

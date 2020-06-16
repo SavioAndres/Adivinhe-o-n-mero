@@ -17,6 +17,7 @@ import { AuthGuard } from './services/guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { RedirectrofileComponent } from './components/redirectrofile/redirectrofile.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RedirectrofileComponent } from './components/redirectrofile/redirectrof
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    OrderModule
   ],
   providers: [AuthService, AuthGuard, CookieService],
   bootstrap: [AppComponent],

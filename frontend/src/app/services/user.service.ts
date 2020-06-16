@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { User } from '../models/user';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Score } from '../models/score';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,13 @@ export class UserService {
 
   getUser(id: number): Observable<User> {
     return this.httpClient.get<User>(this.url + '/user/' + id, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
+  }
+
+  getScores(id: number): Observable<Score[]> {
+    return this.httpClient.get<Score[]>(this.url + '/scoresuser/' + id, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError));
