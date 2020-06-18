@@ -1,5 +1,31 @@
 <div class="container">
-    <div class="content">
-        
+  <div class="content">
+      <p>{{ message }}</p>
+    <div class="row">
+      <div class="input-field col s12">
+        <input [(ngModel)]="user.name" id="name" type="text" class="validate" value="{{ user.name }}" placeholder="Nome" required />
+      </div>
     </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input [(ngModel)]="user.email" id="email" type="email" class="validate" value="{{ user.email }}" placeholder="Email" required />
+      </div>
+      <div class="input-field col s6">
+        <input [(ngModel)]="user.password" id="password" type="password" class="validate" placeholder="Senha" required />
+      </div>
+    </div>
+    <div style="margin-bottom: 20px;" class="row">
+      <div class="input-field col s12">
+        <button style="width: 100%;" class="btn waves-effect waves-light" type="submit" (click)="updateAccount()" name="action">
+          Salvar mudança
+        </button>
+      </div>
+    </div>
+    <hr />
+    <button style="float: right;" class="btn waves-effect waves-light red lighten-2" (click)="deleteAccount()" name="action">
+        Exluir conta
+      </button>
+    <div style="height: 30px;">
+    </div>
+  </div>
 </div>

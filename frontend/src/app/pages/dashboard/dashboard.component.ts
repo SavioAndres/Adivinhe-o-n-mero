@@ -30,13 +30,11 @@ export class DashboardComponent implements OnInit {
     this.form = form;
     this.playService.play(this.play).subscribe((res) => {
       this.result(res);
-      console.log(res);
     });
   }
 
   start() {
     this.playService.play(this.play).subscribe((res) => {
-      console.log(res);
     });
     this.startPlay = true;
     this.setStartPlay(true);

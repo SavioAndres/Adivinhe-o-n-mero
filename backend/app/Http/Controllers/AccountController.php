@@ -99,9 +99,16 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::where('id', $request->userid)->first();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if (!empty($request->password)) {
+            $user->password = $request->password;
+        }
+        $user->update();
+        return ['status' => true];
     }
 
     /**
@@ -110,8 +117,10 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $user = User::where('id', $request->userid)->first();
+        $user->delete();
+        return ['status' => true];
     }
 }

@@ -12,7 +12,7 @@ import { Score } from 'src/app/models/score';
 export class ProfileComponent implements OnInit {
 
   user = {} as User;
-  scores: Score[];
+  scores = {} as Score[];
   private idUser: number;
 
   constructor(private userService: UserService, private _route: ActivatedRoute) {
@@ -33,7 +33,6 @@ export class ProfileComponent implements OnInit {
   getScores() {
     this.userService.getScores(this.idUser).subscribe((res: Score[]) => {
       this.scores = res;
-      console.log(res)
     });
   }
 

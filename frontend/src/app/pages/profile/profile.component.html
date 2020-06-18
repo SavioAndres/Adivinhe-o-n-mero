@@ -23,12 +23,14 @@
             <tr>
               <th>Score</th>
               <th>Attempts</th>
+              <th>Data</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of scores">
+            <tr *ngFor="let item of scores sortAccounts('-created_at')">
               <td>{{ item.score }}</td>
               <td>{{ item.attempts }}</td>
+              <td>{{ item.created_at }}</td>
             </tr>
           </tbody>
         </table>

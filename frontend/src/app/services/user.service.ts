@@ -42,6 +42,20 @@ export class UserService {
         catchError(this.handleError));
   }
 
+  upUserMe(user: User): Observable<User> {
+    return this.httpClient.put<User>(this.url + '/updateaccount', user, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
+  }
+
+  delUserMe(): Observable<User> {
+    return this.httpClient.delete<User>(this.url + '/deleteaccount', this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError));
+  }
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

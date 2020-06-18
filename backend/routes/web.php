@@ -28,4 +28,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('user', 'UserController@showMe');
     $router->get('user/{id}', 'UserController@show');
     $router->get('scoresuser/{id}', 'UserController@scores');
+    $router->put('updateaccount', 'AccountController@update');
+    $router->delete('deleteaccount', 'AccountController@destroy');
 });
